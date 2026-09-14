@@ -17,7 +17,7 @@ cd my-app
 claude-apply nuxt            # or: expo / astro / react dotnet (combine as needed)
 claude
 > /setup-matt-pocock-skills
-git add CLAUDE.md .claude .mcp.json docs/agents CONTEXT.md
+git add CLAUDE.md .claude .agents skills-lock.json .mcp.json docs/agents CONTEXT.md
 git commit -m "agent setup"
 ```
 Other machines get the project config on `git pull`.
