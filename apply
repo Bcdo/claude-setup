@@ -8,6 +8,10 @@ if [ $# -eq 0 ]; then
   echo "profiles:"; ls "$DIR/profiles" | sed 's/\.sh$/  /'
   exit 1
 fi
+# The `skills` CLI needs Node >= 22.20. Pick up fnm's default Node if the shell hasn't.
+command -v fnm >/dev/null 2>&1 && eval "$(fnm env --shell bash)"
+node_major="$(node -v 2>/dev/null | sed 's/^v\([0-9]*\).*/\1/')"
+[ "${node_major:-0}" -ge 22 ] || { echo "Node $(node -v 2>/dev/null || echo '(missing)') is too old for the skills CLI (needs >= 22.20)"; exit 1; }
 for p in "$@"; do
   f="$DIR/profiles/$p.sh"
   [ -f "$f" ] || { echo "unknown profile: $p"; exit 1; }
