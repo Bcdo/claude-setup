@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Apply one or more stack profiles to the current project.
+# usage: apply <profile> [<profile>...]   e.g. apply dotnet expo
+set -euo pipefail
+DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+if [ $# -eq 0 ]; then
+  echo "usage: apply <profile> [<profile>...]"
+  echo "profiles:"; ls "$DIR/profiles" | sed 's/\.sh$/  /'
+  exit 1
+fi
+for p in "$@"; do
+  f="$DIR/profiles/$p.sh"
+  [ -f "$f" ] || { echo "unknown profile: $p"; exit 1; }
+  echo "== $p"; SETUP_DIR="$DIR" bash "$f"
+done
+[ -f CONTEXT.md ] || touch CONTEXT.md
+echo
+echo "Next: run 'claude', then /setup-matt-pocock-skills"
