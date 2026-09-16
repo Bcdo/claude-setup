@@ -14,13 +14,14 @@ Rerun `install.sh` any time to update.
 ## New project
 ```bash
 cd my-app
-claude-apply nuxt            # or: expo / astro / react dotnet (combine as needed)
+claude-apply nuxt            # or: expo / astro / react / dotnet / seo (combine as needed)
 claude
 > /setup-matt-pocock-skills
 git add CLAUDE.md .claude .agents skills-lock.json .mcp.json docs/agents CONTEXT.md
 git commit -m "agent setup"
 ```
-Other machines get the project config on `git pull`.
+Other machines get the project config on `git pull`. Plugins enabled per project (`seo`) still
+need `claude-apply seo` once on each machine — Claude Code won't auto-install a third-party plugin.
 
 ## Enterprise / team repos
 Don't commit personal config there. Put plugin enablement in `.claude/settings.local.json`
